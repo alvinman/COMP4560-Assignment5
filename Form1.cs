@@ -331,15 +331,13 @@ namespace asgn5v1
 		protected override void OnPaint(PaintEventArgs pea)
 		{
 			Graphics grfx = pea.Graphics;
-         Pen pen = new Pen(Color.White, 3);
+            Pen pen = new Pen(Color.White, 3);
 			double temp;
 			int k;
 
             if (gooddata)
             {
 
-                ctrans = shapeInitializationMatrix();
-                
                 //apply the net transformation matrix to all the points
                 for (int i = 0; i < numpts; i++)
                 {
@@ -434,7 +432,8 @@ namespace asgn5v1
 			}
 			scrnpts = new double[numpts,4];
 			setIdentity(ctrans,4,4);  //initialize transformation matrix to identity
-			return true;
+            ctrans = shapeInitializationMatrix();
+            return true;
 		} // end of GetNewData
 
 		void DecodeCoords(ArrayList coorddata)
@@ -491,11 +490,14 @@ namespace asgn5v1
 		{
 			if (e.Button == transleftbtn)
 			{
+                
 				Refresh();
 			}
 			if (e.Button == transrightbtn) 
 			{
-				Refresh();
+                ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(75, 0, 0));
+                
+                Refresh();
 			}
 			if (e.Button == transupbtn)
 			{
