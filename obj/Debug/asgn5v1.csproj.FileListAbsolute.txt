@@ -34,3 +34,11 @@ D:\graphics assignment 5 milestone\asgn5\obj\Debug\asgn5v1.Transformer.resources
 D:\graphics assignment 5 milestone\asgn5\obj\Debug\asgn5v1.csproj.GenerateResource.Cache
 C:\Users\alvin\Google Drive\School\COMP 4560 - Computer Graphics\Assignments\graphics assignment 5 milestone\asgn5\obj\Debug\asgn5v1.exe
 C:\Users\alvin\Google Drive\School\COMP 4560 - Computer Graphics\Assignments\graphics assignment 5 milestone\asgn5\obj\Debug\asgn5v1.pdb
+E:\VisualStudio Projects\COMP4560-Assignment5\obj\Debug\asgn5v1.exe
+E:\VisualStudio Projects\COMP4560-Assignment5\obj\Debug\asgn5v1.pdb
+E:\VisualStudio Projects\COMP4560-Assignment5\bin\Debug\asgn5v1.exe
+E:\VisualStudio Projects\COMP4560-Assignment5\bin\Debug\asgn5v1.pdb
+E:\VisualStudio Projects\COMP4560-Assignment5\obj\Debug\asgn5v1.csprojResolveAssemblyReference.cache
+E:\VisualStudio Projects\COMP4560-Assignment5\obj\Debug\asgn5v1.AboutDialogBox.resources
+E:\VisualStudio Projects\COMP4560-Assignment5\obj\Debug\asgn5v1.Transformer.resources
+E:\VisualStudio Projects\COMP4560-Assignment5\obj\Debug\asgn5v1.csproj.GenerateResource.Cache

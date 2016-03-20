@@ -490,44 +490,77 @@ namespace asgn5v1
 		{
 			if (e.Button == transleftbtn)
 			{
-                
-				Refresh();
+                ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(-75, 0, 0));
+                Refresh();
 			}
 			if (e.Button == transrightbtn) 
 			{
                 ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(75, 0, 0));
-                
                 Refresh();
 			}
 			if (e.Button == transupbtn)
 			{
-				Refresh();
+                ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(0, -75, 0));
+                Refresh();
 			}
 			
 			if(e.Button == transdownbtn)
 			{
-				Refresh();
+                ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(0, 75, 0));
+                Refresh();
 			}
 			if (e.Button == scaleupbtn) 
 			{
-				Refresh();
+                //translate to origin
+                //use scrnpt to get the x and y of the point 0 (center point)
+                ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(-scrnpts[0, 0], -scrnpts[0, 1], 0));
+                //scale
+                ctrans = multiply4x4Matrix(ctrans, getScaleMatrix(1.1, 1.1, 1.1));
+                //translate back
+                ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(scrnpts[0, 0], scrnpts[0, 1], 0));
+                
+                Refresh();
 			}
 			if (e.Button == scaledownbtn) 
 			{
-				Refresh();
+                //translate to origin
+                ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(-scrnpts[0, 0], -scrnpts[0, 1], 0));
+                //scale
+                ctrans = multiply4x4Matrix(ctrans, getScaleMatrix(0.9, 0.9, 0.9));
+                //translate back
+                ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(scrnpts[0, 0], scrnpts[0, 1], 0));
+                Refresh();
 			}
 			if (e.Button == rotxby1btn) 
 			{
-				
-			}
+                //translate to origin
+                ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(-scrnpts[0, 0], -scrnpts[0, 1], 0));
+                //scale
+                ctrans = multiply4x4Matrix(ctrans, getRotationMatrix(0.05, "x"));
+                //translate back
+                ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(scrnpts[0, 0], scrnpts[0, 1], 0));
+                Refresh();
+            }
 			if (e.Button == rotyby1btn) 
 			{
-				
-			}
+                //translate to origin
+                ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(-scrnpts[0, 0], -scrnpts[0, 1], 0));
+                //scale
+                ctrans = multiply4x4Matrix(ctrans, getRotationMatrix(0.05, "y"));
+                //translate back
+                ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(scrnpts[0, 0], scrnpts[0, 1], 0));
+                Refresh();
+            }
 			if (e.Button == rotzby1btn) 
 			{
-				
-			}
+                //translate to origin
+                ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(-scrnpts[0, 0], -scrnpts[0, 1], 0));
+                //scale
+                ctrans = multiply4x4Matrix(ctrans, getRotationMatrix(0.05, "z"));
+                //translate back
+                ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(scrnpts[0, 0], scrnpts[0, 1], 0));
+                Refresh();
+            }
 
 			if (e.Button == rotxbtn) 
 			{
@@ -673,6 +706,38 @@ namespace asgn5v1
             {
                 result[1, 1] = -1;
             }
+            return result;
+        }
+
+        private double[,] getRotationMatrix(double radians, string axis)
+        {
+            double[,] result = new double[4, 4];
+            setIdentity(result, 4, 4);
+
+            switch (axis)
+            {
+                case "z":
+                    result[0, 0] = Math.Cos(radians);
+                    result[0, 1] = Math.Sin(radians);
+                    result[1, 0] = -Math.Sin(radians);
+                    result[1, 1] = Math.Cos(radians);
+                    break;
+                case "y":
+                    result[0, 0] = Math.Cos(radians);
+                    result[0, 2] = Math.Sin(radians);
+                    result[2, 0] = -Math.Sin(radians);
+                    result[2, 2] = Math.Cos(radians);
+                    break;
+                case "x":
+                    result[1, 1] = Math.Cos(radians);
+                    result[1, 2] = Math.Sin(radians);
+                    result[2, 1] = -Math.Sin(radians);
+                    result[2, 2] = Math.Cos(radians);
+                    break;
+            }
+
+            
+
             return result;
         }
 
