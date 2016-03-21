@@ -513,52 +513,52 @@ namespace asgn5v1
 			{
                 //translate to origin
                 //use scrnpt to get the x and y of the point 0 (center point)
-                ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(-scrnpts[0, 0], -scrnpts[0, 1], 0));
+                ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(-scrnpts[0, 0], -scrnpts[0, 1], -scrnpts[0, 2]));
                 //scale
                 ctrans = multiply4x4Matrix(ctrans, getScaleMatrix(1.1, 1.1, 1.1));
                 //translate back
-                ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(scrnpts[0, 0], scrnpts[0, 1], 0));
+                ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(scrnpts[0, 0], scrnpts[0, 1], scrnpts[0, 2]));
                 
                 Refresh();
 			}
 			if (e.Button == scaledownbtn) 
 			{
                 //translate to origin
-                ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(-scrnpts[0, 0], -scrnpts[0, 1], 0));
+                ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(-scrnpts[0, 0], -scrnpts[0, 1], -scrnpts[0, 2]));
                 //scale
                 ctrans = multiply4x4Matrix(ctrans, getScaleMatrix(0.9, 0.9, 0.9));
                 //translate back
-                ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(scrnpts[0, 0], scrnpts[0, 1], 0));
+                ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(scrnpts[0, 0], scrnpts[0, 1], scrnpts[0, 2]));
                 Refresh();
 			}
 			if (e.Button == rotxby1btn) 
 			{
                 //translate to origin
-                ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(-scrnpts[0, 0], -scrnpts[0, 1], 0));
+                ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(-scrnpts[0, 0], -scrnpts[0, 1], -scrnpts[0, 2]));
                 //scale
                 ctrans = multiply4x4Matrix(ctrans, getRotationMatrix(0.05, "x"));
                 //translate back
-                ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(scrnpts[0, 0], scrnpts[0, 1], 0));
+                ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(scrnpts[0, 0], scrnpts[0, 1], scrnpts[0, 2]));
                 Refresh();
             }
 			if (e.Button == rotyby1btn) 
 			{
                 //translate to origin
-                ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(-scrnpts[0, 0], -scrnpts[0, 1], 0));
+                ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(-scrnpts[0, 0], -scrnpts[0, 1], -scrnpts[0, 2]));
                 //scale
                 ctrans = multiply4x4Matrix(ctrans, getRotationMatrix(0.05, "y"));
                 //translate back
-                ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(scrnpts[0, 0], scrnpts[0, 1], 0));
+                ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(scrnpts[0, 0], scrnpts[0, 1], scrnpts[0, 2]));
                 Refresh();
             }
 			if (e.Button == rotzby1btn) 
 			{
                 //translate to origin
-                ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(-scrnpts[0, 0], -scrnpts[0, 1], 0));
+                ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(-scrnpts[0, 0], -scrnpts[0, 1], -scrnpts[0, 2]));
                 //scale
                 ctrans = multiply4x4Matrix(ctrans, getRotationMatrix(0.05, "z"));
                 //translate back
-                ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(scrnpts[0, 0], scrnpts[0, 1], 0));
+                ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(scrnpts[0, 0], scrnpts[0, 1], scrnpts[0, 2]));
                 Refresh();
             }
 
