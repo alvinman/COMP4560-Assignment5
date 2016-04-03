@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using System.Data;
 using System.IO;
 using System.Text;
+using System.Threading;
 
 namespace asgn5v1
 {
@@ -49,8 +50,9 @@ namespace asgn5v1
 		private System.Windows.Forms.ToolBarButton resetbtn;
 		private System.Windows.Forms.ToolBarButton exitbtn;
 		int[,] lines;
+        Thread rotationThread;
 
-		public Transformer()
+        public Transformer()
 		{
 			//
 			// Required for Windows Form Designer support
@@ -382,6 +384,8 @@ namespace asgn5v1
 
 		void RestoreInitialImage()
 		{
+            setIdentity(ctrans, 4, 4);
+            ctrans = shapeInitializationMatrix();
 			Invalidate();
 		} // end of RestoreInitialImage
 
@@ -488,6 +492,13 @@ namespace asgn5v1
 
 		private void toolBar1_ButtonClick(object sender, System.Windows.Forms.ToolBarButtonClickEventArgs e)
 		{
+
+            //check if rotation thread exists, kill it if it does
+            if (rotationThread != null && rotationThread.IsAlive) 
+            {
+                rotationThread.Abort();
+            }
+
 			if (e.Button == transleftbtn)
 			{
                 ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(-75, 0, 0));
@@ -533,47 +544,35 @@ namespace asgn5v1
 			}
 			if (e.Button == rotxby1btn) 
 			{
-                //translate to origin
-                ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(-scrnpts[0, 0], -scrnpts[0, 1], -scrnpts[0, 2]));
-                //scale
-                ctrans = multiply4x4Matrix(ctrans, getRotationMatrix(0.05, "x"));
-                //translate back
-                ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(scrnpts[0, 0], scrnpts[0, 1], scrnpts[0, 2]));
+                rotateX();
                 Refresh();
             }
 			if (e.Button == rotyby1btn) 
 			{
-                //translate to origin
-                ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(-scrnpts[0, 0], -scrnpts[0, 1], -scrnpts[0, 2]));
-                //scale
-                ctrans = multiply4x4Matrix(ctrans, getRotationMatrix(0.05, "y"));
-                //translate back
-                ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(scrnpts[0, 0], scrnpts[0, 1], scrnpts[0, 2]));
+                rotateY();
                 Refresh();
             }
 			if (e.Button == rotzby1btn) 
 			{
-                //translate to origin
-                ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(-scrnpts[0, 0], -scrnpts[0, 1], -scrnpts[0, 2]));
-                //scale
-                ctrans = multiply4x4Matrix(ctrans, getRotationMatrix(0.05, "z"));
-                //translate back
-                ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(scrnpts[0, 0], scrnpts[0, 1], scrnpts[0, 2]));
+                rotateZ();
                 Refresh();
             }
 
 			if (e.Button == rotxbtn) 
 			{
-				
-			}
+                rotationThread = new Thread(new ThreadStart(continuousRotationX));
+                rotationThread.Start();
+            }
 			if (e.Button == rotybtn) 
 			{
-				
-			}
-			
+                rotationThread = new Thread(new ThreadStart(continuousRotationY));
+                rotationThread.Start();
+            }
+	
 			if (e.Button == rotzbtn) 
 			{
-				
+                rotationThread = new Thread(new ThreadStart(continuousRotationZ));
+                rotationThread.Start();
 			}
 
 			if(e.Button == shearleftbtn)
@@ -739,6 +738,66 @@ namespace asgn5v1
             
 
             return result;
+        }
+
+        private void rotateX()
+        {
+            //translate to origin
+            ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(-scrnpts[0, 0], -scrnpts[0, 1], -scrnpts[0, 2]));
+            //scale
+            ctrans = multiply4x4Matrix(ctrans, getRotationMatrix(0.05, "x"));
+            //translate back
+            ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(scrnpts[0, 0], scrnpts[0, 1], scrnpts[0, 2]));
+        }
+
+        private void rotateY()
+        {
+            //translate to origin
+            ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(-scrnpts[0, 0], -scrnpts[0, 1], -scrnpts[0, 2]));
+            //scale
+            ctrans = multiply4x4Matrix(ctrans, getRotationMatrix(0.05, "y"));
+            //translate back
+            ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(scrnpts[0, 0], scrnpts[0, 1], scrnpts[0, 2]));
+        }
+
+        private void rotateZ()
+        {
+            //translate to origin
+            ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(-scrnpts[0, 0], -scrnpts[0, 1], -scrnpts[0, 2]));
+            //scale
+            ctrans = multiply4x4Matrix(ctrans, getRotationMatrix(0.05, "z"));
+            //translate back
+            ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(scrnpts[0, 0], scrnpts[0, 1], scrnpts[0, 2]));
+        }
+
+        private void continuousRotationX()
+        {
+            while (true)
+            {
+                rotateX();
+                Invalidate();
+                Thread.Sleep(50);
+            }
+        }
+
+        private void continuousRotationY()
+        {
+            while (true)
+            {
+                rotateY();
+                Invalidate();
+                Thread.Sleep(50);
+            }
+        }
+
+        private void continuousRotationZ()
+        {
+            while (true)
+            {
+                rotateZ();
+                Invalidate();
+                Thread.Sleep(50);
+            }
         }
 
 
