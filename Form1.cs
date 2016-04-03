@@ -577,12 +577,24 @@ namespace asgn5v1
 
 			if(e.Button == shearleftbtn)
 			{
-				Refresh();
+                //translate to origin
+                ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(-scrnpts[16, 0], -scrnpts[16, 1], -scrnpts[16, 2]));
+                //scale
+                ctrans = multiply4x4Matrix(ctrans, getShearMatrix("left"));
+                //translate back
+                ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(scrnpts[16, 0], scrnpts[16, 1], scrnpts[16, 2]));
+                Refresh();
 			}
 
 			if (e.Button == shearrightbtn) 
 			{
-				Refresh();
+                //translate to origin
+                ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(-scrnpts[16, 0], -scrnpts[16, 1], -scrnpts[16, 2]));
+                //scale
+                ctrans = multiply4x4Matrix(ctrans, getShearMatrix("right"));
+                //translate back
+                ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(scrnpts[16, 0], scrnpts[16, 1], scrnpts[16, 2]));
+                Refresh();
 			}
 
 			if (e.Button == resetbtn)
@@ -734,8 +746,24 @@ namespace asgn5v1
                     result[2, 2] = Math.Cos(radians);
                     break;
             }
+            return result;
+        }
 
-            
+
+        private double[,] getShearMatrix(string direction)
+        {
+            double[,] result = new double[4, 4];
+            setIdentity(result, 4, 4);
+
+            switch (direction)
+            {
+                case "left":
+                    result[1, 0] = 0.1;
+                    break;
+                case "right":
+                    result[1, 0] = -0.1;
+                    break;
+            }
 
             return result;
         }
