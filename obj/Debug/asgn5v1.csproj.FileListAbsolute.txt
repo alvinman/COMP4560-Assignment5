@@ -42,3 +42,11 @@ E:\VisualStudio Projects\COMP4560-Assignment5\obj\Debug\asgn5v1.csprojResolveAss
 E:\VisualStudio Projects\COMP4560-Assignment5\obj\Debug\asgn5v1.AboutDialogBox.resources
 E:\VisualStudio Projects\COMP4560-Assignment5\obj\Debug\asgn5v1.Transformer.resources
 E:\VisualStudio Projects\COMP4560-Assignment5\obj\Debug\asgn5v1.csproj.GenerateResource.Cache
+C:\Users\alvin\OneDrive\Documents\COMP4560-Assignment5\obj\Debug\asgn5v1.exe
+C:\Users\alvin\OneDrive\Documents\COMP4560-Assignment5\obj\Debug\asgn5v1.pdb
+C:\Users\alvin\OneDrive\Documents\COMP4560-Assignment5\bin\Debug\asgn5v1.exe
+C:\Users\alvin\OneDrive\Documents\COMP4560-Assignment5\bin\Debug\asgn5v1.pdb
+C:\Users\alvin\OneDrive\Documents\COMP4560-Assignment5\obj\Debug\asgn5v1.csprojResolveAssemblyReference.cache
+C:\Users\alvin\OneDrive\Documents\COMP4560-Assignment5\obj\Debug\asgn5v1.AboutDialogBox.resources
+C:\Users\alvin\OneDrive\Documents\COMP4560-Assignment5\obj\Debug\asgn5v1.Transformer.resources
+C:\Users\alvin\OneDrive\Documents\COMP4560-Assignment5\obj\Debug\asgn5v1.csproj.GenerateResource.Cache

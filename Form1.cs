@@ -309,7 +309,7 @@ namespace asgn5v1
             // 
             // Transformer
             // 
-            this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
+            this.AutoScaleBaseSize = new System.Drawing.Size(10, 24);
             this.ClientSize = new System.Drawing.Size(508, 306);
             this.Controls.Add(this.toolBar1);
             this.Name = "Transformer";
@@ -577,23 +577,42 @@ namespace asgn5v1
 
 			if(e.Button == shearleftbtn)
 			{
+                //check for lowest point in scrnpts
+                int maxIndex = 0;
+                for(int i = 0; i < numpts; i++){
+                    if(scrnpts[i, 1] > scrnpts[maxIndex, 1])
+                    {
+                        maxIndex = i;
+                    }
+                }
+
                 //translate to origin
-                ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(-scrnpts[16, 0], -scrnpts[16, 1], -scrnpts[16, 2]));
+                ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(-scrnpts[maxIndex, 0], -scrnpts[maxIndex, 1], -scrnpts[maxIndex, 2]));
                 //scale
                 ctrans = multiply4x4Matrix(ctrans, getShearMatrix("left"));
                 //translate back
-                ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(scrnpts[16, 0], scrnpts[16, 1], scrnpts[16, 2]));
+                ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(scrnpts[maxIndex, 0], scrnpts[maxIndex, 1], scrnpts[maxIndex, 2]));
                 Refresh();
 			}
 
 			if (e.Button == shearrightbtn) 
 			{
+                //check for lowest point in scrnpts
+                int maxIndex = 0;
+                for (int i = 0; i < numpts; i++)
+                {
+                    if (scrnpts[i, 1] > scrnpts[maxIndex, 1])
+                    {
+                        maxIndex = i;
+                    }
+                }
+
                 //translate to origin
-                ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(-scrnpts[16, 0], -scrnpts[16, 1], -scrnpts[16, 2]));
+                ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(-scrnpts[maxIndex, 0], -scrnpts[maxIndex, 1], -scrnpts[maxIndex, 2]));
                 //scale
                 ctrans = multiply4x4Matrix(ctrans, getShearMatrix("right"));
                 //translate back
-                ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(scrnpts[16, 0], scrnpts[16, 1], scrnpts[16, 2]));
+                ctrans = multiply4x4Matrix(ctrans, getTranslationMatrix(scrnpts[maxIndex, 0], scrnpts[maxIndex, 1], scrnpts[maxIndex, 2]));
                 Refresh();
 			}
 
